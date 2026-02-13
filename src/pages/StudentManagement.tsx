@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, Plus, Search, Filter, Download, BookOpen, Home, ClipboardList, Megaphone, LogOut, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Users, Plus, Search, BookOpen, Home, ClipboardList, Megaphone, LogOut, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { adminService } from '../services/adminService';
 import { Student } from '../types';
@@ -9,8 +9,6 @@ import StudentTable from '../components/admin/StudentTable';
 import AddStudentModal from '../components/admin/AddStudentModal';
 import EditStudentModal from '../components/admin/EditStudentModal';
 import Button from '../components/common/Button';
-import Input from '../components/common/Input';
-import Loader from '../components/common/Loader';
 
 const StudentManagement: React.FC = () => {
   const { logout } = useAuth();

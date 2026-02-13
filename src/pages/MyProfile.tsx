@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Home, Award, User, LogOut, Save, Eye, EyeOff, Lock, Camera, Menu } from 'lucide-react';
+import { BookOpen, Home, Award, User, LogOut, Save, Eye, EyeOff, Lock, Camera } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { studentService } from '../services/studentService';
 import { Student } from '../types';

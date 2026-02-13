@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Lock, Phone, MapPin, Eye, EyeOff, CheckCircle, ChevronRight, ChevronLeft, GraduationCap } from 'lucide-react';
+import { User, Mail, Lock, Phone, Eye, EyeOff, CheckCircle, ChevronRight, ChevronLeft, GraduationCap } from 'lucide-react';
 import { authService } from '../services/authService';
-import { CLASSES, SECTIONS, GENDERS, BLOOD_GROUPS } from '../utils/constants';
+import { CLASSES, SECTIONS, GENDERS } from '../utils/constants';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 
