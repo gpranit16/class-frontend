@@ -6,10 +6,9 @@ import { adminService } from '../services/adminService';
 import { Announcement } from '../types';
 import AnnouncementForm from '../components/admin/AnnouncementForm';
 import Button from '../components/common/Button';
-import Card from '../components/common/Card';
 import Modal from '../components/common/Modal';
 import Loader from '../components/common/Loader';
-import { formatDate, truncateText } from '../utils/helpers';
+import { formatDate } from '../utils/helpers';
 
 const AnnouncementsManagement: React.FC = () => {
   const { logout } = useAuth();

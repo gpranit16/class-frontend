@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Announcement } from '../../types';
-import { CLASSES, SECTIONS } from '../../utils/constants';
+import { CLASSES } from '../../utils/constants';
 import Button from '../common/Button';
 import Input from '../common/Input';
 

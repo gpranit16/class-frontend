@@ -1,6 +1,6 @@
 import React from 'react';
 import { Student } from '../../types';
-import { Eye, Edit2, Trash2, MoreVertical, CheckCircle, XCircle } from 'lucide-react';
+import { Eye, Edit2, Trash2, CheckCircle, XCircle } from 'lucide-react';
 import { getInitials } from '../../utils/helpers';
 
 interface Props {

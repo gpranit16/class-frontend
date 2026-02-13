@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Student } from '../../types';
-import { CLASSES, SECTIONS, GENDERS, BLOOD_GROUPS } from '../../utils/constants';
+import { CLASSES, SECTIONS } from '../../utils/constants';
 import Button from '../common/Button';
 import Input from '../common/Input';
 import Modal from '../common/Modal';

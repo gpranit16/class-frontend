@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, BookOpen, Home, ClipboardList, Megaphone, LogOut, Plus, Search, Filter, ChevronLeft, ChevronRight, Trash2, Edit2 } from 'lucide-react';
+import { Users, BookOpen, Home, ClipboardList, Megaphone, LogOut, Plus, Search, ChevronLeft, ChevronRight, Trash2, Edit2 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { adminService } from '../services/adminService';
 import { MarksEntry } from '../types';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, BookOpen, Award, TrendingUp, Bell, Plus, BarChart3, LogOut, Home, ClipboardList, Megaphone, ChevronRight, Calendar, Menu } from 'lucide-react';
+import { Users, BookOpen, Plus, LogOut, Home, ClipboardList, Megaphone, ChevronRight, Menu } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { adminService } from '../services/adminService';
 import { DashboardStats as DashboardStatsType, Announcement } from '../types';
