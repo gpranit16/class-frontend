@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Home, Award, Bell, User, LogOut, TrendingUp, Calendar, BarChart3, Menu } from 'lucide-react';
+import { BookOpen, Home, Award, User, LogOut, TrendingUp, Calendar, BarChart3 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { studentService } from '../services/studentService';
 import { Student, MarksEntry, Announcement, ResultsSummary } from '../types';
 import PerformanceChart from '../components/student/PerformanceChart';
 import ResultsCard from '../components/student/ResultsCard';
 import AnnouncementList from '../components/student/AnnouncementList';
-import ProfileCard from '../components/student/ProfileCard';
 import Loader from '../components/common/Loader';
 
 const StudentDashboard: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Student | null>(null);
   const [recentMarks, setRecentMarks] = useState<MarksEntry[]>([]);

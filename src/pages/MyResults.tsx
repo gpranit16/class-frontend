@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Home, Award, User, LogOut, Search, Filter, ChevronLeft, ChevronRight, Menu } from 'lucide-react';
+import { BookOpen, Home, Award, User, LogOut, Menu } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { studentService } from '../services/studentService';
 import { MarksEntry, ResultsSummary } from '../types';
@@ -18,11 +18,7 @@ const MyResults: React.FC = () => {
   const [subjectFilter, setSubjectFilter] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  useEffect(() => {
-    fetchData();
-  }, [examTypeFilter, subjectFilter]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const params: any = {};
@@ -35,7 +31,11 @@ const MyResults: React.FC = () => {
       setMarks(marksRes.marks || []);
       setSummary(summaryRes.data);
     } catch (err) { console.error(err); } finally { setLoading(false); }
-  };
+  }, [examTypeFilter, subjectFilter]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const getGradeColor = (grade: string) => {
     const colors: Record<string, string> = { 'A+': 'bg-green-100 text-green-700', A: 'bg-green-50 text-green-600', 'B+': 'bg-blue-100 text-blue-700', B: 'bg-blue-50 text-blue-600', 'C+': 'bg-yellow-100 text-yellow-700', C: 'bg-yellow-50 text-yellow-600', D: 'bg-orange-100 text-orange-700', F: 'bg-red-100 text-red-700' };
