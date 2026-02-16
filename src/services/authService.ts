@@ -11,6 +11,11 @@ export const authService = {
     return response.data;
   },
 
+  studentLoginByEmail: async (email: string) => {
+    const response = await api.post('/auth/student/login-by-email', { email });
+    return response.data;
+  },
+
   studentSignup: async (data: any) => {
     const response = await api.post('/auth/student/signup', data);
     return response.data;

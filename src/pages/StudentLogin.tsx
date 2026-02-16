@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Mail, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
+import { Mail, GraduationCap } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { authService } from '../services/authService';
 import Button from '../components/common/Button';
@@ -8,8 +8,6 @@ import Input from '../components/common/Input';
 
 const StudentLogin: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -19,8 +17,8 @@ const StudentLogin: React.FC = () => {
     e.preventDefault();
     setError('');
 
-    if (!email || !password) {
-      setError('Please fill in all fields');
+    if (!email) {
+      setError('Please enter your email address');
       return;
     }
 
@@ -33,13 +31,13 @@ const StudentLogin: React.FC = () => {
 
     setLoading(true);
     try {
-      const data = await authService.studentLogin(email, password);
+      const data = await authService.studentLoginByEmail(email);
       if (data.success) {
         login(data.token, { ...data.student, role: 'student', id: data.student.id });
         navigate('/student/dashboard');
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed. Please check your email and password.');
+      setError(err.response?.data?.message || 'Login failed. Please check your email address.');
     } finally {
       setLoading(false);
     }
@@ -101,24 +99,6 @@ const StudentLogin: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 icon={<Mail className="w-4 h-4" />}
               />
-
-              <div className="relative">
-                <Input
-                  label="Password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  icon={<Lock className="w-4 h-4" />}
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-9 text-gray-400 hover:text-gray-600"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
 
               <Button type="submit" className="w-full" loading={loading}>
                 Login to Dashboard
