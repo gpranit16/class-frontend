@@ -156,53 +156,89 @@ const MarksManagement: React.FC = () => {
             </div>
           </div>
 
-          {/* Table */}
+          {/* Table - Desktop / Cards - Mobile */}
           {loading ? <Loader /> : (
-            <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-gray-50 border-b border-gray-100">
-                      {['Student', 'Class', 'Exam', 'Subject', 'Marks', 'Grade', 'Date', 'Actions'].map((h) => (
-                        <th key={h} className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-50">
-                    {marks.length === 0 ? (
-                      <tr><td colSpan={8} className="text-center py-12 text-gray-500">No marks records found</td></tr>
-                    ) : marks.map((m) => (
-                      <tr key={m._id} className="hover:bg-gray-50/50 transition-colors">
-                        <td className="py-3 px-4">
-                          <div className="text-sm font-medium text-gray-900">{m.studentName || '-'}</div>
-                          <div className="text-xs text-gray-500 font-mono">{typeof m.studentId === 'string' ? m.studentId : m.studentId?.studentId || ''}</div>
-                        </td>
-                        <td className="py-3 px-4 text-sm text-gray-600">{m.class}</td>
-                        <td className="py-3 px-4">
-                          <div className="text-sm text-gray-900">{m.examName}</div>
-                          <div className="text-xs text-gray-500">{m.examType}</div>
-                        </td>
-                        <td className="py-3 px-4 text-sm text-gray-700">{m.subject}</td>
-                        <td className="py-3 px-4">
-                          <span className="text-sm font-semibold text-gray-900">{m.marksObtained}/{m.totalMarks}</span>
-                          <span className="text-xs text-gray-500 ml-1">({m.percentage?.toFixed(1)}%)</span>
-                        </td>
-                        <td className="py-3 px-4">
-                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getGradeColor(m.grade || '')}`}>{m.grade}</span>
-                        </td>
-                        <td className="py-3 px-4 text-sm text-gray-500">{formatDate(m.examDate)}</td>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-1">
-                            <button onClick={() => setEditItem(m)} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg"><Edit2 className="w-4 h-4" /></button>
-                            <button onClick={() => handleDelete(m._id)} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
-                          </div>
-                        </td>
+            <>
+              {/* Desktop Table */}
+              <div className="hidden md:block bg-white rounded-xl border border-gray-100 overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="bg-gray-50 border-b border-gray-100">
+                        {['Student', 'Class', 'Exam', 'Subject', 'Marks', 'Grade', 'Date', 'Actions'].map((h) => (
+                          <th key={h} className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>
+                        ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                      {marks.length === 0 ? (
+                        <tr><td colSpan={8} className="text-center py-12 text-gray-500">No marks records found</td></tr>
+                      ) : marks.map((m) => (
+                        <tr key={m._id} className="hover:bg-gray-50/50 transition-colors">
+                          <td className="py-3 px-4">
+                            <div className="text-sm font-medium text-gray-900">{m.studentName || '-'}</div>
+                            <div className="text-xs text-gray-500 font-mono">{typeof m.studentId === 'string' ? m.studentId : m.studentId?.studentId || ''}</div>
+                          </td>
+                          <td className="py-3 px-4 text-sm text-gray-600">{m.class}</td>
+                          <td className="py-3 px-4">
+                            <div className="text-sm text-gray-900">{m.examName}</div>
+                            <div className="text-xs text-gray-500">{m.examType}</div>
+                          </td>
+                          <td className="py-3 px-4 text-sm text-gray-700">{m.subject}</td>
+                          <td className="py-3 px-4">
+                            <span className="text-sm font-semibold text-gray-900">{m.marksObtained}/{m.totalMarks}</span>
+                            <span className="text-xs text-gray-500 ml-1">({m.percentage?.toFixed(1)}%)</span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getGradeColor(m.grade || '')}`}>{m.grade}</span>
+                          </td>
+                          <td className="py-3 px-4 text-sm text-gray-500">{formatDate(m.examDate)}</td>
+                          <td className="py-3 px-4">
+                            <div className="flex items-center gap-1">
+                              <button onClick={() => setEditItem(m)} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg"><Edit2 className="w-4 h-4" /></button>
+                              <button onClick={() => handleDelete(m._id)} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            </div>
+
+              {/* Mobile Cards */}
+              <div className="md:hidden space-y-3">
+                {marks.length === 0 ? (
+                  <div className="bg-white rounded-xl border border-gray-100 p-8 text-center text-gray-500">No marks records found</div>
+                ) : marks.map((m) => (
+                  <div key={m._id} className="bg-white rounded-xl border border-gray-100 p-4 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="text-sm font-semibold text-gray-900">{m.studentName || '-'}</div>
+                        <div className="text-xs text-gray-500 font-mono mt-0.5">{typeof m.studentId === 'string' ? m.studentId : m.studentId?.studentId || ''}</div>
+                      </div>
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getGradeColor(m.grade || '')}`}>{m.grade}</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div><span className="text-gray-500">Class:</span> <span className="text-gray-900 font-medium">{m.class}</span></div>
+                      <div><span className="text-gray-500">Subject:</span> <span className="text-gray-900 font-medium">{m.subject}</span></div>
+                      <div><span className="text-gray-500">Exam:</span> <span className="text-gray-900 font-medium">{m.examType}</span></div>
+                      <div><span className="text-gray-500">Date:</span> <span className="text-gray-900 font-medium">{formatDate(m.examDate)}</span></div>
+                    </div>
+                    <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                      <div className="text-sm">
+                        <span className="font-semibold text-gray-900">{m.marksObtained}/{m.totalMarks}</span>
+                        <span className="text-gray-500 ml-1">({m.percentage?.toFixed(1)}%)</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <button onClick={() => setEditItem(m)} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg"><Edit2 className="w-4 h-4" /></button>
+                        <button onClick={() => handleDelete(m._id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
 
           {/* Pagination */}
