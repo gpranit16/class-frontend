@@ -68,7 +68,7 @@ const AdminDashboard: React.FC = () => {
         </div>
         <nav className="flex-1 p-3 space-y-1">
           {menuItems.map((item) => (
-            <button key={item.label} onClick={() => navigate(item.path)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${item.active ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}>
+            <button key={item.label} onClick={() => { navigate(item.path); setSidebarOpen(false); }} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${item.active ? 'bg-primary-50 text-primary-700' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'}`}>
               <item.icon className="w-5 h-5 flex-shrink-0" />
               <span>{item.label}</span>
             </button>
@@ -112,7 +112,7 @@ const AdminDashboard: React.FC = () => {
               <h3 className="text-sm font-semibold text-gray-900 mb-4">Quick Actions</h3>
               <div className="space-y-2">
                 {quickActions.map((action) => (
-                  <button key={action.label} onClick={() => navigate(action.path)} className="w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-50 transition-all group">
+                  <button key={action.label} onClick={() => { navigate(action.path); setSidebarOpen(false); }} className="w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-50 transition-all group">
                     <div className={`w-9 h-9 ${action.color} rounded-lg flex items-center justify-center shrink-0`}>
                       <action.icon className="w-4 h-4 text-white" />
                     </div>
@@ -127,7 +127,7 @@ const AdminDashboard: React.FC = () => {
             <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 p-4 sm:p-5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-semibold text-gray-900">Recent Announcements</h3>
-                <button onClick={() => navigate('/admin/announcements')} className="text-xs text-primary-600 hover:text-primary-700 font-medium">View All</button>
+                <button onClick={() => { navigate('/admin/announcements'); setSidebarOpen(false); }} className="text-xs text-primary-600 hover:text-primary-700 font-medium">View All</button>
               </div>
               {announcements.length === 0 ? (
                 <p className="text-sm text-gray-500 text-center py-8">No announcements yet</p>
