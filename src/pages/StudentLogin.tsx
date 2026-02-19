@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { Mail, GraduationCap } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
@@ -14,16 +14,7 @@ const StudentLogin: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // Auto-login if email is provided in query parameter
-  useEffect(() => {
-    const emailFromQuery = searchParams.get('email');
-    if (emailFromQuery) {
-      setEmail(emailFromQuery);
-      handleAutoLogin(emailFromQuery);
-    }
-  }, [searchParams]);
-
-  const handleAutoLogin = async (emailAddress: string) => {
+  const handleAutoLogin = useCallback(async (emailAddress: string) => {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailAddress)) {
@@ -43,7 +34,16 @@ const StudentLogin: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [login, navigate]);
+
+  // Auto-login if email is provided in query parameter
+  useEffect(() => {
+    const emailFromQuery = searchParams.get('email');
+    if (emailFromQuery) {
+      setEmail(emailFromQuery);
+      handleAutoLogin(emailFromQuery);
+    }
+  }, [searchParams, handleAutoLogin]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
