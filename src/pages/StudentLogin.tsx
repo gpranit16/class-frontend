@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { Mail, GraduationCap } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { authService } from '../services/authService';
@@ -7,11 +7,43 @@ import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 
 const StudentLogin: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  // Auto-login if email is provided in query parameter
+  useEffect(() => {
+    const emailFromQuery = searchParams.get('email');
+    if (emailFromQuery) {
+      setEmail(emailFromQuery);
+      handleAutoLogin(emailFromQuery);
+    }
+  }, [searchParams]);
+
+  const handleAutoLogin = async (emailAddress: string) => {
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailAddress)) {
+      setError('Invalid email format in URL');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const data = await authService.studentLoginByEmail(emailAddress);
+      if (data.success) {
+        login(data.token, { ...data.student, role: 'student', id: data.student.id });
+        navigate('/student/dashboard');
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Auto-login failed. Please try manual login.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
