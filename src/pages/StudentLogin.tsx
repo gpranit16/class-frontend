@@ -77,27 +77,7 @@ const StudentLogin: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
-      {/* Left Panel - Illustration */}
-      <div className="hidden lg:flex lg:w-2/5 bg-gradient-to-br from-primary-800 via-primary-900 to-blue-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: 'radial-gradient(circle at 25% 25%, white 1px, transparent 1px)',
-              backgroundSize: '30px 30px',
-            }}
-          />
-        </div>
-        <div className="relative flex flex-col items-center justify-center p-12 text-center">
-          <GraduationCap className="w-20 h-20 mb-6 text-accent-400" />
-          <h2 className="text-4xl font-bold mb-4">Welcome Back!</h2>
-          <p className="text-blue-200 text-lg leading-relaxed">
-            Check your results and track your academic progress with SuccessPathClasses.
-          </p>
-        </div>
-      </div>
-
-      {/* Right Panel - Login Form */}
+      {/* Login Form */}
       <div className="flex-1 flex items-center justify-center p-6 bg-gray-50">
         <div className="w-full max-w-md">
           {/* Mobile logo */}
